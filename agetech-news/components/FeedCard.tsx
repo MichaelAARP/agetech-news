@@ -13,9 +13,10 @@ function formatDate(dateStr: string | undefined): string {
 
 type Props = {
   item: FeedItem;
+  showCategory: boolean;
 };
 
-export default function FeedCard({ item }: Props) {
+export default function FeedCard({ item, showCategory }: Props) {
   return (
     <a
       href={item.link}
@@ -25,7 +26,7 @@ export default function FeedCard({ item }: Props) {
     >
       <div className={styles.card}>
         <h2 className={styles.title}>{item.title}</h2>
-        <p className={styles.category}>{item.category}</p>
+        {showCategory && <p className={styles.category}>{item.category}</p>}
         <p className={styles.date}>{formatDate(item.pubDate)}</p>
         <p className={styles.content}>{item.content}</p>
         <span className={styles.link}>Read more →</span>

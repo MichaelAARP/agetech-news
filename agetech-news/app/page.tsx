@@ -23,7 +23,12 @@ export default function Home() {
       })
       .then(data => {
         if (Array.isArray(data)) {
-          const sorted = data.sort((a, b) => {
+          const cleaned = data.map(item => ({
+            ...item,
+            title: item.title?.replace(/\s*\([^()]+\)\s*$/, '') ?? '',
+          }));
+
+          const sorted = cleaned.sort((a, b) => {
             const dateA = new Date(a.pubDate || '').getTime();
             const dateB = new Date(b.pubDate || '').getTime();
             return dateB - dateA;
@@ -36,7 +41,16 @@ export default function Home() {
       });
   }, []);
 
-  const allCategories = Array.from(new Set(items.map(item => item.category))).filter(cat => cat !== 'Techstars');
+  const customOrder = ['Startups', 'Investors', 'Enterprises', 'Testbeds', 'Business Services'];
+  const allCategories = customOrder.filter(cat => {
+    const lowerCat = cat.toLowerCase();
+    return cat === 'Startups'
+      ? items.some(item =>
+          item.category?.toLowerCase() === 'startups' || item.category?.toLowerCase() === 'techstars'
+        )
+      : items.some(item => item.category?.toLowerCase() === lowerCat);
+  });
+
   const filteredItems = selectedCategory === 'Recent'
     ? items
     : selectedCategory === 'Startups'
@@ -70,7 +84,7 @@ export default function Home() {
         </div>
 
         {filteredItems.map((item, index) => (
-          <FeedCard key={index} item={item} />
+          <FeedCard key={index} item={item} showCategory={selectedCategory === 'Recent'} />
         ))}
       </div>
     </main>
