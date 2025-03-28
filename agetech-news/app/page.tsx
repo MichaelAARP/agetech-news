@@ -44,7 +44,7 @@ export default function Home() {
       : items.filter(item => item.category === selectedCategory);
 
   return (
-    <main>
+    <main style={{ backgroundColor: '#f9f8f6' }}>
       <div className={styles.hero}>
         <img src="/hero.jpg" alt="Hero" className={styles.heroImage} />
         <h1 className={styles.heroTitle}>AgeTech News</h1>
