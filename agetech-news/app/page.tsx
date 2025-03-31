@@ -8,6 +8,7 @@ import styles from './page.module.css';
 export default function Home() {
   const [items, setItems] = useState<FeedItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('Recent');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const feedUrl = 'http://aarpagetechcollaborative.shiftportal.com/rss/1/-/-/100';
 
@@ -41,7 +42,7 @@ export default function Home() {
       });
   }, []);
 
-  const customOrder = ['Startups', 'Investors', 'Enterprises', 'Testbeds', 'Business Services'];
+  const customOrder = ['Startups', 'Investors', 'Enterprises', 'Testbed', 'Business Services'];
   const allCategories = customOrder.filter(cat => {
     const lowerCat = cat.toLowerCase();
     return cat === 'Startups'
@@ -51,36 +52,53 @@ export default function Home() {
       : items.some(item => item.category?.toLowerCase() === lowerCat);
   });
 
-  const filteredItems = selectedCategory === 'Recent'
+  const filteredItems = (selectedCategory === 'Recent'
     ? items
     : selectedCategory === 'Startups'
       ? items.filter(item => item.category === 'Startups' || item.category === 'Techstars')
-      : items.filter(item => item.category === selectedCategory);
+      : items.filter(item => item.category === selectedCategory)
+  ).filter(item =>
+    item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-    <main style={{ backgroundColor: '#f9f8f6' }}>
+    <main>
       <div className={styles.hero}>
         <img src="/hero.jpg" alt="Hero" className={styles.heroImage} />
         <h1 className={styles.heroTitle}>AgeTech News</h1>
       </div>
 
       <div className={styles.container}>
-        <div className={styles.filterRow}>
-          <button
-            className={`btn ${selectedCategory === 'Recent' ? 'btn-primary' : 'btn-outline-primary'}`}
-            onClick={() => setSelectedCategory('Recent')}
-          >
-            Recent
-          </button>
-          {allCategories.map((cat, index) => (
+        <div className={styles.toolbarRow}>
+          <div className={styles.filterGroup}>
             <button
-              key={index}
-              className={`btn ${selectedCategory === cat ? 'btn-primary' : 'btn-outline-primary'}`}
-              onClick={() => setSelectedCategory(cat)}
+              className={`btn ${selectedCategory === 'Recent' ? 'btn-primary' : 'btn-outline-primary'}`}
+              onClick={() => setSelectedCategory('Recent')}
             >
-              {cat}
+              Recent
             </button>
-          ))}
+            {allCategories.map((cat, index) => (
+              <button
+                key={index}
+                className={`btn ${selectedCategory === cat ? 'btn-primary' : 'btn-outline-primary'}`}
+                onClick={() => setSelectedCategory(cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          <div className={styles.searchGroup}>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search stories..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
         </div>
 
         {filteredItems.map((item, index) => (

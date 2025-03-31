@@ -1,26 +1,30 @@
+body {
+  background-color: #f9f8f6;
+}
+
 .btn-primary {
   background-color: #540D32;
   border-color: #540D32;
-  border-radius: 18px;
+  border-radius: 12px;
 }
 
 .btn-primary:hover {
   background-color: #4E0A2B;
   border-color: #4E0A2B;
-  border-radius: 18px;
+  border-radius: 12px;
 }
 
 .btn-outline-primary {
   color: #540D32;
   border-color: #540D32;
-  border-radius: 18px;
+  border-radius: 12px;
 }
 
 .btn-outline-primary:hover {
   background-color: #F75D59;
   color: #fff;
   border-color: #F75D59;
-  border-radius: 18px;
+  border-radius: 12px;
 }
 
 .btn-primary:active,
