@@ -17,6 +17,7 @@ body {
 .btn-outline-primary {
   color: #540D32;
   border-color: #540D32;
+  background-color: #fff; 
   border-radius: 12px;
 }
 
