@@ -81,7 +81,7 @@ export default function Home() {
   return (
     <main style={{ backgroundColor: '#f9f8f6' }}>
       <div className={styles.hero}>
-        <img src="/hero.jpg" alt="Hero" className={styles.heroImage} />
+        <img src="/hero.jpg" alt="AgeTech News" className={styles.heroImage} />
         <h1 className={styles.heroTitle}>AgeTech News</h1>
       </div>
 
