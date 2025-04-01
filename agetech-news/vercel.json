@@ -2,10 +2,7 @@
   "crons": [
     {
       "path": "/api/cron/update-feed",
-      "schedule": "0 6 * * *",
-      "headers": {
-        "Authorization": "Bearer YOUR_SECRET_HERE"
-      }
+      "schedule": "0 6 * * *"
     }
   ]
 }
