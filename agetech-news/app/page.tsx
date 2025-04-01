@@ -10,7 +10,7 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string>('Recent');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const feedUrl = 'http://aarpagetechcollaborative.shiftportal.com/rss/1/-/-/100';
+  const feedUrl = 'http://aarpagetechcollaborative.shiftportal.com/rss/1/-/-/1000';
 
   useEffect(() => {
     fetch(`/api/feed?url=${encodeURIComponent(feedUrl)}`)
@@ -42,14 +42,16 @@ export default function Home() {
       });
   }, []);
 
-  const customOrder = ['Startups', 'Investors', 'Enterprises', 'Testbed', 'Business Services'];
+  const customOrder = ['Startups', 'Investors', 'Enterprises', 'Testbeds', 'Business Services'];
   const allCategories = customOrder.filter(cat => {
-    const lowerCat = cat.toLowerCase();
+    const normalize = (str: string) => str?.toLowerCase().trim();
+    const target = normalize(cat);
+
     return cat === 'Startups'
       ? items.some(item =>
-          item.category?.toLowerCase() === 'startups' || item.category?.toLowerCase() === 'techstars'
+          normalize(item.category) === 'startups' || normalize(item.category) === 'techstars'
         )
-      : items.some(item => item.category?.toLowerCase() === lowerCat);
+      : items.some(item => normalize(item.category) === target);
   });
 
   const filteredItems = (selectedCategory === 'Recent'
@@ -63,8 +65,25 @@ export default function Home() {
     item.category.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const getSearchMatchCount = (category: string) => {
+    const normalize = (str: string) => str?.toLowerCase().trim();
+    const matchQuery = (item: FeedItem) =>
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.category.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return category === 'Startups'
+      ? items.filter(item =>
+          (normalize(item.category) === 'startups' || normalize(item.category) === 'techstars') &&
+          matchQuery(item)
+        ).length
+      : items.filter(item =>
+          normalize(item.category) === normalize(category) && matchQuery(item)
+        ).length;
+  };
+
   return (
-    <main>
+    <main style={{ backgroundColor: '#f9f8f6' }}>
       <div className={styles.hero}>
         <img src="/hero.jpg" alt="Hero" className={styles.heroImage} />
         <h1 className={styles.heroTitle}>AgeTech News</h1>
@@ -79,15 +98,19 @@ export default function Home() {
             >
               Recent
             </button>
-            {allCategories.map((cat, index) => (
-              <button
-                key={index}
-                className={`btn ${selectedCategory === cat ? 'btn-primary' : 'btn-outline-primary'}`}
-                onClick={() => setSelectedCategory(cat)}
-              >
-                {cat}
-              </button>
-            ))}
+            {allCategories.map((cat, index) => {
+              const count = getSearchMatchCount(cat);
+              const label = searchQuery ? `${cat} (${count})` : cat;
+              return (
+                <button
+                  key={index}
+                  className={`btn ${selectedCategory === cat ? 'btn-primary' : 'btn-outline-primary'}`}
+                  onClick={() => setSelectedCategory(cat)}
+                >
+                  {label}
+                </button>
+              );
+            })}
           </div>
 
           <div className={styles.searchGroup}>
