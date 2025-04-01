@@ -10,35 +10,32 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string>('Recent');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const feedUrl = 'http://aarpagetechcollaborative.shiftportal.com/rss/1/-/-/1000';
+  // const feedUrl = 'http://aarpagetechcollaborative.shiftportal.com/rss/1/-/-/1000';
+  const feedUrl = '/feed.json';
 
   useEffect(() => {
-    fetch(`/api/feed?url=${encodeURIComponent(feedUrl)}`)
-      .then(async (res) => {
-        try {
-          return await res.json();
-        } catch (err) {
-          console.error('Failed to parse JSON response:', err);
-          return { error: 'Invalid JSON returned from API' };
-        }
-      })
+    fetch(feedUrl)
+      .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
           const cleaned = data.map(item => ({
             ...item,
             title: item.title?.replace(/\s*\([^()]+\)\s*$/, '') ?? '',
           }));
-
+  
           const sorted = cleaned.sort((a, b) => {
             const dateA = new Date(a.pubDate || '').getTime();
             const dateB = new Date(b.pubDate || '').getTime();
             return dateB - dateA;
           });
-
+  
           setItems(sorted);
         } else {
           console.error('Feed fetch error:', data.error || 'Unknown error');
         }
+      })
+      .catch(err => {
+        console.error('Fetch failed:', err);
       });
   }, []);
 
