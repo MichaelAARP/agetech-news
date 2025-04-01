@@ -10,7 +10,6 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string>('Recent');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  // const feedUrl = 'http://aarpagetechcollaborative.shiftportal.com/rss/1/-/-/1000';
   const feedUrl = '/feed.json';
 
   useEffect(() => {
@@ -114,7 +113,7 @@ export default function Home() {
             <input
               type="text"
               className="form-control"
-              placeholder="Search stories..."
+              placeholder="Search Stories..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
