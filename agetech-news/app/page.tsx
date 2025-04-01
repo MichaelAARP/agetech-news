@@ -9,6 +9,8 @@ export default function Home() {
   const [items, setItems] = useState<FeedItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('Recent');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [visibleCount, setVisibleCount] = useState<number>(150);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const feedUrl = '/feed.json';
 
@@ -60,6 +62,25 @@ export default function Home() {
     item.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.category.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const visibleItems = searchQuery ? filteredItems : filteredItems.slice(0, visibleCount);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const bottomReached = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
+
+      if (bottomReached && !isLoadingMore && !searchQuery && visibleCount < filteredItems.length) {
+        setIsLoadingMore(true);
+        setTimeout(() => {
+          setVisibleCount(prev => prev + 150);
+          setIsLoadingMore(false);
+        }, 250);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isLoadingMore, visibleCount, searchQuery, filteredItems.length]);
 
   const getSearchMatchCount = (category: string) => {
     const normalize = (str: string) => str?.toLowerCase().trim();
@@ -120,9 +141,17 @@ export default function Home() {
           </div>
         </div>
 
-        {filteredItems.map((item, index) => (
+        {visibleItems.map((item, index) => (
           <FeedCard key={index} item={item} showCategory={selectedCategory === 'Recent'} />
         ))}
+
+        {isLoadingMore && (
+          <div className={styles.loadingIndicator}>
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
       </div>
     </main>
   );
