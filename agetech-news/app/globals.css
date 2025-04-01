@@ -3,14 +3,14 @@ body {
 }
 
 .btn-primary {
-  background-color: #540D32;
-  border-color: #540D32;
+  background-color: #486784;
+  border-color: #486784;
   border-radius: 12px;
 }
 
 .btn-primary:hover {
-  background-color: #4E0A2B;
-  border-color: #4E0A2B;
+  background-color: #486784;
+  border-color: #486784;
   border-radius: 12px;
 }
 
@@ -31,16 +31,16 @@ body {
 .btn-primary:active,
 .btn-primary:focus,
 .btn-primary:focus-visible {
-  background-color: #4E0A2B !important;
-  border-color: #4E0A2B !important;
+  background-color: #486784 !important;
+  border-color: #486784 !important;
   box-shadow: none !important;
 }
 
 .btn-outline-primary:active,
 .btn-outline-primary:focus,
 .btn-outline-primary:focus-visible {
-  background-color: #F75D59 !important;
-  border-color: #F75D59 !important;
+  background-color: #486784 !important;
+  border-color: #486784 !important;
   color: #fff !important;
   box-shadow: none !important;
 }

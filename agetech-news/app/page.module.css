@@ -70,8 +70,8 @@
 }
 
 .searchGroup input[type="text"]:focus {
-  border-color: #540D32 !important;
-  box-shadow: 0 0 0 0.15rem rgba(84, 13, 50, 0.25) !important;
+  border-color: #486784 !important;
+  box-shadow: 0 0 0 0.2rem rgba(72, 103, 132, 0.35) !important;
   outline: none;
 }
 
