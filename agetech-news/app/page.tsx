@@ -9,7 +9,7 @@ export default function Home() {
   const [items, setItems] = useState<FeedItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('Recent');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [visibleCount, setVisibleCount] = useState<number>(150);
+  const [visibleCount, setVisibleCount] = useState<number>(100); //was 150
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const feedUrl = '/feed.json';
@@ -67,12 +67,13 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
+      // this was already set to 100
       const bottomReached = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
 
       if (bottomReached && !isLoadingMore && !searchQuery && visibleCount < filteredItems.length) {
         setIsLoadingMore(true);
         setTimeout(() => {
-          setVisibleCount(prev => prev + 150);
+          setVisibleCount(prev => prev + 100); //was 150
           setIsLoadingMore(false);
         }, 250);
       }
