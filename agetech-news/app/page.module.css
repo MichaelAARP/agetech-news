@@ -171,10 +171,19 @@
 
   .searchGroup {
     width: 100%;
-    margin-left: 0;
+    display: flex;
+    justify-content: center;
+    padding: 15px 10px;
+    max-width: 100%;
   }
 
   .filterGroup {
     justify-content: center;
+    gap: 8px;
+    
+  }
+
+  .searchGroup input[type="text"] {
+    font-size: 13px;
   }
 }
