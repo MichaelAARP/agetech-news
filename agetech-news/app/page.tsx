@@ -7,7 +7,7 @@ import styles from './page.module.css';
 
 export default function Home() {
   const [items, setItems] = useState<FeedItem[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>('Recent');
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [visibleCount, setVisibleCount] = useState<number>(96);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -52,7 +52,7 @@ export default function Home() {
       : items.some(item => normalize(item.category) === target);
   });
 
-  const filteredItems = (selectedCategory === 'Recent'
+  const filteredItems = (selectedCategory === 'All'
     ? items
     : selectedCategory === 'Startups'
       ? items.filter(item => item.category === 'Startups' || item.category === 'Techstars')
@@ -112,12 +112,12 @@ export default function Home() {
         <div className={styles.toolbarRow}>
           <div className={styles.filterGroup}>
             <button
-              className={`${styles.customBtn} ${
-                selectedCategory === "Recent" ? styles.primary : styles.outline
+              className={`${styles.filterBtn} ${
+                selectedCategory === "All" ? styles.primary : styles.outline
               }`}
-              onClick={() => setSelectedCategory("Recent")}
+              onClick={() => setSelectedCategory("All")}
             >
-              All
+              {searchQuery ? `All (${filteredItems.length})` : 'All'}
             </button>
             {allCategories.map((cat, index) => {
               const count = getSearchMatchCount(cat);
@@ -125,7 +125,7 @@ export default function Home() {
               return (
                 <button
                   key={index}
-                  className={`${styles.customBtn} ${
+                  className={`${styles.filterBtn} ${
                     selectedCategory === cat ? styles.primary : styles.outline
                   }`}
                   onClick={() => setSelectedCategory(cat)}
@@ -151,7 +151,7 @@ export default function Home() {
           <FeedCard
             key={index}
             item={item}
-            showCategory={selectedCategory === "Recent"}
+            showCategory={selectedCategory === "All"}
           />
         ))}
 

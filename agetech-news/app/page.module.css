@@ -94,7 +94,7 @@
   opacity: 1;
 }
 
-.customBtn {
+.filterBtn {
   font-size: 14px;
   font-weight: bold;
   padding: 8px 16px;
@@ -109,6 +109,7 @@
   background-color: #486784;
   color: white;
   border-color: #486784;
+
 }
 
 .primary:hover,
@@ -149,7 +150,9 @@
   animation: spin 0.8s linear infinite;
 }
 
-/* FeedCard.tsx styles */
+/* 
+FeedCard.tsx styles 
+*/
 
 .card {
   display: flex;
@@ -218,7 +221,9 @@
 }
 
 
-/* adds margin for smaller screen */
+/* 
+Adds margin for smaller screen 
+*/
 @media (max-width: 1200px) {
   .container{
     margin: 0 12px;
@@ -226,7 +231,9 @@
 }
 
 
-/* Mobile and Tablet */
+/* 
+Mobile and Tablet 
+*/
 @media (max-width: 985px) {
 
   .heroOverlay {
@@ -263,7 +270,7 @@
     max-width: 500px;
   }
 
-  .customBtn {
+  .filterBtn {
     font-size: 13px;
     max-width: 100%;
     padding-left: 10px;
@@ -275,5 +282,3 @@
     margin: 0px 3px
   }
 }
-
-
