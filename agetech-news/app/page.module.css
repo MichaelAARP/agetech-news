@@ -225,20 +225,9 @@
   }
 }
 
-/* moves search to new line */
+
+/* Mobile and Tablet */
 @media (max-width: 985px) {
-  .searchGroup {
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 0;
-  }
-}
-
-
-@media (max-width: 850px) {
 
   .heroOverlay {
     flex-direction: row;
