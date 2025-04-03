@@ -25,8 +25,13 @@ export default function FeedCard({ item, showCategory }: Props) {
       className={`text-decoration-none ${styles.cardLink}`}
     >
       <div className={styles.card}>
+      {showCategory && (
+        <p className={styles.category}>
+          {item.category.endsWith('s') ? item.category.slice(0, -1) : item.category}
+        </p>
+      )}
         <h2 className={styles.title}>{item.title}</h2>
-        {showCategory && <p className={styles.category}>{item.category}</p>}
+        
         <p className={styles.date}>{formatDate(item.pubDate)}</p>
         <p className={styles.content}>{item.content}</p>
         <span className={styles.link}>Read more →</span>

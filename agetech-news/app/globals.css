@@ -1,49 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+
 body {
   background-color: #f9f8f6;
+  font-family: 'Lato', sans-serif !important;
+  margin: 0;
+  width: 100%;
 }
 
-.btn-primary {
-  background-color: #486784;
-  border-color: #486784;
-  border-radius: 12px;
+/* fix firefox horz scroll bar */
+@-moz-document url-prefix() {
+  html, body {
+    overflow-x: hidden !important;
+    scrollbar-width: none; 
+
+  }
 }
 
-.btn-primary:hover {
-  background-color: #486784;
-  border-color: #486784;
-  border-radius: 12px;
-}
-
-.btn-outline-primary {
-  color: #540D32;
-  border-color: #540D32;
-  background-color: #fff; 
-  border-radius: 12px;
-}
-
-.btn-outline-primary:hover {
-  background-color: #F75D59;
-  color: #fff;
-  border-color: #F75D59;
-  border-radius: 12px;
-}
-
-.btn-primary:active,
-.btn-primary:focus,
-.btn-primary:focus-visible {
-  background-color: #486784 !important;
-  border-color: #486784 !important;
-  box-shadow: none !important;
-}
-
-.btn-outline-primary:active,
-.btn-outline-primary:focus,
-.btn-outline-primary:focus-visible {
-  background-color: #486784 !important;
-  border-color: #486784 !important;
-  color: #fff !important;
-  box-shadow: none !important;
-}
 
 
 @media (max-width: 600px) {
