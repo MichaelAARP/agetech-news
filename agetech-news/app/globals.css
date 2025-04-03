@@ -9,13 +9,13 @@ body {
 }
 
 /* fix firefox horz scroll bar */
-@-moz-document url-prefix() {
+/* @-moz-document url-prefix() {
   html, body {
     overflow-x: hidden !important;
     scrollbar-width: none; 
 
   }
-}
+} */
 
 
 
