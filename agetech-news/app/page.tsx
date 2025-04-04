@@ -100,11 +100,13 @@ export default function Home() {
   };
 
   return (
-    <main style={{ backgroundColor: "#f9f8f6"}}>
+    <main style={{ backgroundColor: "#f9f8f6" }}>
       <div className={styles.hero}>
         <div className={styles.heroOverlay}>
           <h1 className={styles.heroTitle}>AgeTech News</h1>
-          <p className={styles.heroSubheader}>The latest news from companies in the Collaborative.</p>
+          <p className={styles.heroSubheader}>
+            The latest news from companies in the Collaborative.
+          </p>
         </div>
       </div>
 
@@ -117,7 +119,7 @@ export default function Home() {
               }`}
               onClick={() => setSelectedCategory("All")}
             >
-              {searchQuery ? `All (${filteredItems.length})` : 'All'}
+              {searchQuery ? `All (${filteredItems.length})` : "All"}
             </button>
             {allCategories.map((cat, index) => {
               const count = getSearchMatchCount(cat);
@@ -148,11 +150,9 @@ export default function Home() {
         </div>
 
         {visibleItems.map((item, index) => (
-          <FeedCard
-            key={index}
-            item={item}
-            showCategory={selectedCategory === "All"}
-          />
+          <div key={index} className={`${styles.cardWrapper} ${index === 0 ? styles.featured : ""}`}>
+            <FeedCard item={item} showCategory={selectedCategory === "All"} />
+          </div>
         ))}
 
         {isLoadingMore && (

@@ -40,11 +40,13 @@
 /* content wrapper */
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 16px;
   max-width: 1200px;
   margin: 0 auto;
   margin-bottom: 40px;
+  /* remove to match card length */
+  /* align-items: start;  */
 }
 
 /* wrapper for filter buttons and search */
@@ -165,11 +167,27 @@ FeedCard.tsx styles
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.35);
   outline: 1px solid rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  /* remove to match card length */
+  /* height: auto; */
+   
 }
 
 .card:hover {
   transform: translateY(-0.1px) scale(1.0005);
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.45);
+}
+
+/* First Tile Styling */
+.featured {
+  grid-column: span 2;
+}
+
+.featured .title {
+  font-size: 1.75rem;
+}
+
+.featured .content {
+  font-size: 1.3rem;
 }
 
 .title {
@@ -280,5 +298,18 @@ Mobile and Tablet
 
   .card {
     margin: 0px 3px
+  }
+
+  /* First Tile Styling */
+  .featured {
+    grid-column: span 1 !important;
+  }
+
+  .featured .title {
+    font-size: 1.5rem;
+  }
+  
+  .featured .content {
+    font-size: 0.95rem;
   }
 }

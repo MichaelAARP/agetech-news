@@ -14,9 +14,10 @@ function formatDate(dateStr: string | undefined): string {
 type Props = {
   item: FeedItem;
   showCategory: boolean;
+  className?: string;
 };
 
-export default function FeedCard({ item, showCategory }: Props) {
+export default function FeedCard({ item, showCategory, className = '' }: Props) {
   return (
     <a
       href={item.link}
@@ -24,7 +25,7 @@ export default function FeedCard({ item, showCategory }: Props) {
       rel="noopener noreferrer"
       className={`text-decoration-none ${styles.cardLink}`}
     >
-      <div className={styles.card}>
+      <div className={`${styles.card} ${className}`}>
       {showCategory && (
         <p className={styles.category}>
           {item.category.endsWith('s') ? item.category.slice(0, -1) : item.category}
