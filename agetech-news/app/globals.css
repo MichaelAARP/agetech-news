@@ -1,7 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
+
+html, body {
+  height: auto;
+  overflow-x: hidden;
+}
+
 html{
   background-color: #f9f8f6;
+
 }
 
 

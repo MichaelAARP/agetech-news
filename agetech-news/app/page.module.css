@@ -1,3 +1,9 @@
+.main{
+  background-color: #f9f8f6;
+  overflow-x: hidden; /* only hide horizontal overflow */
+  position: relative;
+}
+
 .hero {
   position: relative;
   height: 300px;
@@ -37,8 +43,40 @@
   text-align: left;
 }
 
+.hexWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 1;
+}
+
+.hexBlue {
+  position: absolute;
+  left: 1550px;
+  top: 1000px; /* positive value moves it down */
+  will-change: transform;
+  transition: transform 0.1s linear;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hexRed {
+  position: absolute;
+  right: 1600px;
+  top: 500px; /* tweak to match FeedCard grid */
+  will-change: transform;
+  transition: transform 0.1s linear;
+  overflow-x: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* content wrapper */
 .container {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 16px;

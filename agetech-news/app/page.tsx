@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { FeedItem } from '../types/feed';
 import FeedCard from '../components/FeedCard';
 import styles from './page.module.css';
+import React from 'react';
 
 export default function Home() {
   const [items, setItems] = useState<FeedItem[]>([]);
@@ -11,6 +12,7 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [visibleCount, setVisibleCount] = useState<number>(96);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [hexCount, setHexCount] = useState(0);
 
   const feedUrl = '/feed.json';
 
@@ -72,7 +74,10 @@ export default function Home() {
       if (bottomReached && !isLoadingMore && !searchQuery && visibleCount < filteredItems.length) {
         setIsLoadingMore(true);
         setTimeout(() => {
-          setVisibleCount(prev => prev + 96);
+          const newVisibleCount = visibleCount + 96;
+          const newHexCount = Math.max(0, Math.ceil(newVisibleCount / 24));
+          setHexCount(newHexCount);
+          setVisibleCount(newVisibleCount);
           setIsLoadingMore(false);
         }, 250);
       }
@@ -99,70 +104,131 @@ export default function Home() {
         ).length;
   };
 
-  return (
-    <main style={{ backgroundColor: "#f9f8f6" }}>
-      <div className={styles.hero}>
-        <div className={styles.heroOverlay}>
-          <h1 className={styles.heroTitle}>AgeTech News</h1>
-          <p className={styles.heroSubheader}>
-            The latest news from companies in the Collaborative.
-          </p>
-        </div>
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+  
+      const blueHex = document.querySelectorAll(`.${styles.hexBlue}`);
+      const redHex = document.querySelectorAll(`.${styles.hexRed}`);
+  
+      blueHex.forEach((el) => {
+        (el as HTMLElement).style.transform = `translateY(${-scrollY * 0.14}px)`;
+      });
+  
+      redHex.forEach((el) => {
+        (el as HTMLElement).style.transform = `translateY(${-scrollY * 0.2}px)`;
+      });
+    };
+  
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const hexPerStories = 24;
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const count = Math.max(0, Math.ceil(visibleItems.length / hexPerStories));
+      setHexCount(count);
+    }, 100); // allow DOM to update first
+
+    return () => clearTimeout(timeout);
+  }, [visibleItems]);
+
+  const hexSpacing = 3000;
+
+  const floatingHexes = Array.from({ length: hexCount }).map((_, i) => {
+    const offset = i * hexSpacing;
+    return (
+      <div
+        key={i}
+        className={styles.hexWrapper}
+        style={{ top: `${offset}px` }}
+      >
+        <img
+          src="/Logos-hexagon-right-big.png"
+          alt="Blue Hex"
+          className={styles.hexBlue}
+        />
+        <img
+          src="/Logos-hexagon-left-big.png"
+          alt="Red Hex"
+          className={styles.hexRed}
+        />
       </div>
+    );
+  });
 
-      <div className={styles.container}>
-        <div className={styles.toolbarRow}>
-          <div className={styles.filterGroup}>
-            <button
-              className={`${styles.filterBtn} ${
-                selectedCategory === "All" ? styles.primary : styles.outline
-              }`}
-              onClick={() => setSelectedCategory("All")}
-            >
-              {searchQuery ? `All (${filteredItems.length})` : "All"}
-            </button>
-            {allCategories.map((cat, index) => {
-              const count = getSearchMatchCount(cat);
-              const label = searchQuery ? `${cat} (${count})` : cat;
-              return (
-                <button
-                  key={index}
-                  className={`${styles.filterBtn} ${
-                    selectedCategory === cat ? styles.primary : styles.outline
-                  }`}
-                  onClick={() => setSelectedCategory(cat)}
-                >
-                  {label}
-                </button>
-              );
-            })}
-          </div>
-
-          <div className={styles.searchGroup}>
-            <input
-              type="text"
-              className={styles.searchInput}
-              placeholder="Search Stories..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+  return (
+    <>
+      {floatingHexes}
+      <main className={styles.main}>
+        <div className={styles.hero}>
+          <div className={styles.heroOverlay}>
+            <h1 className={styles.heroTitle}>AgeTech News</h1>
+            <p className={styles.heroSubheader}>
+              The latest news from companies in the Collaborative.
+            </p>
           </div>
         </div>
-
-        {visibleItems.map((item, index) => (
-          <div key={index} className={`${styles.cardWrapper} ${index === 0 ? styles.featured : ""}`}>
-            <FeedCard item={item} showCategory={selectedCategory === "All"} />
-          </div>
-        ))}
-
-        {isLoadingMore && (
-          <div className={styles.loadingIndicator}>
-            <div className={styles.spinner} role="status">
-              <span className="visually-hidden">Loading...</span>
+  
+        <div className={styles.container}>
+          <div className={styles.toolbarRow}>
+            <div className={styles.filterGroup}>
+              <button
+                className={`${styles.filterBtn} ${
+                  selectedCategory === "All" ? styles.primary : styles.outline
+                }`}
+                onClick={() => setSelectedCategory("All")}
+              >
+                {searchQuery ? `All (${filteredItems.length})` : "All"}
+              </button>
+              {allCategories.map((cat, index) => {
+                const count = getSearchMatchCount(cat);
+                const label = searchQuery ? `${cat} (${count})` : cat;
+                return (
+                  <button
+                    key={index}
+                    className={`${styles.filterBtn} ${
+                      selectedCategory === cat ? styles.primary : styles.outline
+                    }`}
+                    onClick={() => setSelectedCategory(cat)}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+  
+            <div className={styles.searchGroup}>
+              <input
+                type="text"
+                className={styles.searchInput}
+                placeholder="Search Stories..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
             </div>
           </div>
-        )}
-      </div>
-    </main>
+  
+          {visibleItems.map((item, index) => (
+            <div
+              key={index}
+              className={`${styles.cardWrapper} ${index === 0 ? styles.featured : ""}`}
+            >
+              <FeedCard item={item} showCategory={selectedCategory === "All"} />
+            </div>
+          ))}
+  
+          {isLoadingMore && (
+            <div className={styles.loadingIndicator}>
+              <div className={styles.spinner} role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )}
+        </div>
+      </main>
+    </>
   );
 }
