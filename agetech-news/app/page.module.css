@@ -221,7 +221,7 @@ FeedCard.tsx styles
   flex-direction: column;
   justify-content: space-between;
   height: auto;
-  max-height: 500px; /* NEW: Limits tall cards */
+  max-height: 500px;
   overflow: hidden;
 }
 
@@ -231,8 +231,8 @@ FeedCard.tsx styles
 }
 
 /* First Tile Styling */
-.featured {
-  flex-basis: calc(66.66% - 16px); /* approx 2 out of 3 columns minus gutter */
+/* .featured {
+  flex-basis: calc(66.66% - 16px);
   max-width: calc(66.66% - 16px);
   width: 100%;
   box-sizing: border-box;
@@ -244,7 +244,7 @@ FeedCard.tsx styles
 
 .featured .content {
   font-size: 1.3rem;
-}
+} */
 
 .title {
   font-size: 1.5rem;
@@ -294,6 +294,7 @@ FeedCard.tsx styles
   transform: scale(1.01);
 }
 
+/* remove hex once interfer with grid */
 @media (max-width: 1580px) {
   .hexWrapper {
     display: none;
@@ -320,11 +321,6 @@ Mobile and Tablet
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-  }
-
-  .masonryColumn {
-    /* padding-left: 0px !important; */
-
   }
 
   .toolbarRow {
@@ -367,7 +363,7 @@ Mobile and Tablet
   }
 
   /* First Tile Styling */
-  .featured {
+  /* .featured {
     grid-column: span 1 !important;
   }
 
@@ -377,25 +373,11 @@ Mobile and Tablet
   
   .featured .content {
     font-size: 0.95rem;
-  }
+  } */
 
   .hexWrapper {
     display: none;
   }
-}
-
-.featuredWrapper {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 24px;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.featuredWrapper > * {
-  grid-column: span 2;
 }
 
 .cardWrapper {
@@ -422,7 +404,7 @@ Mobile and Tablet
   min-width: 0;
 }
 
-.featuredRow {
+/* .featuredRow {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 16px;
@@ -437,4 +419,4 @@ Mobile and Tablet
   background: #fff;
   padding: 24px;
   border-radius: 16px;
-}
+} */
