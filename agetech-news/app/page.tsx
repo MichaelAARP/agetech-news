@@ -15,6 +15,7 @@ const breakpointColumnsObj = {
 
 export default function Home() {
   const [items, setItems] = useState<FeedItem[]>([]);
+  const [totalSearchResults, setTotalSearchResults] = useState<number>(0);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [visibleCount, setVisibleCount] = useState<number>(96);
@@ -39,6 +40,7 @@ export default function Home() {
             return dateB - dateA;
           });
 
+          setTotalSearchResults(sorted.length);
           setItems(sorted);
         } else {
           console.error('Feed fetch error:', data.error || 'Unknown error');
@@ -53,12 +55,19 @@ export default function Home() {
   const allCategories = customOrder.filter(cat => {
     const normalize = (str: string) => str?.toLowerCase().trim();
     const target = normalize(cat);
+    const matchQuery = (item: FeedItem) =>
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.category.toLowerCase().includes(searchQuery.toLowerCase());
 
     return cat === 'Startups'
       ? items.some(item =>
-          normalize(item.category) === 'startups' || normalize(item.category) === 'techstars'
+          (normalize(item.category) === 'startups' || normalize(item.category) === 'techstars') &&
+          matchQuery(item)
         )
-      : items.some(item => normalize(item.category) === target);
+      : items.some(item =>
+          normalize(item.category) === target && matchQuery(item)
+        );
   });
 
   const filteredItems = (selectedCategory === 'All'
@@ -166,6 +175,16 @@ export default function Home() {
     );
   });
 
+  useEffect(() => {
+    const matchQuery = (item: FeedItem) =>
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.category.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const totalMatches = items.filter(matchQuery).length;
+    setTotalSearchResults(totalMatches);
+  }, [searchQuery, items]);
+
   return (
     <>
       {floatingHexes}
@@ -188,7 +207,7 @@ export default function Home() {
                 }`}
                 onClick={() => setSelectedCategory("All")}
               >
-                {searchQuery ? `All (${filteredItems.length})` : "All"}
+                {searchQuery ? `All (${totalSearchResults})` : "All"}
               </button>
               {allCategories.map((cat, index) => {
                 const count = getSearchMatchCount(cat);
