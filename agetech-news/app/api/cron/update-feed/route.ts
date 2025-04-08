@@ -3,12 +3,12 @@ import fs from 'fs/promises';
 import path from 'path';
 
 export async function GET(req: Request) {
-  const authHeader = req.headers.get('Authorization');
-  const expected = `Bearer ${process.env.CRON_SECRET}`;
-
-  if (authHeader !== expected) {
-    return new Response('Unauthorized', { status: 401 });
-  }
+  // const authHeader = req.headers.get('Authorization');
+  // const expected = `Bearer ${process.env.CRON_SECRET}`;
+  //
+  // if (authHeader !== expected) {
+  //   return new Response('Unauthorized', { status: 401 });
+  // }
   const feedUrl = 'http://aarpagetechcollaborative.shiftportal.com/rss/1/-/-/5000';
 
   try {
