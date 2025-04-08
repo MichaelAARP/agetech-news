@@ -4,7 +4,14 @@ import { useEffect, useState } from 'react';
 import { FeedItem } from '../types/feed';
 import FeedCard from '../components/FeedCard';
 import styles from './page.module.css';
+import Masonry from 'react-masonry-css';
 import React from 'react';
+
+const breakpointColumnsObj = {
+  default: 3,
+  985: 1
+};
+
 
 export default function Home() {
   const [items, setItems] = useState<FeedItem[]>([]);
@@ -140,21 +147,21 @@ export default function Home() {
   const floatingHexes = Array.from({ length: hexCount }).map((_, i) => {
     const offset = i * hexSpacing;
     return (
-      <div
-        key={i}
-        className={styles.hexWrapper}
-        style={{ top: `${offset}px` }}
-      >
-        <img
-          src="/Logos-hexagon-right-big.png"
-          alt="Blue Hex"
-          className={styles.hexBlue}
-        />
-        <img
-          src="/Logos-hexagon-left-big.png"
-          alt="Red Hex"
-          className={styles.hexRed}
-        />
+      <div key={i} className={styles.hexWrapper} style={{ top: `${offset}px` }}>
+        <div className={styles.hexBlueWrapper}>
+          <img
+            src="/Logos-hexagon-right-big.png"
+            alt="Blue Hex"
+            className={styles.hexBlue}
+          />
+        </div>
+        <div className={styles.hexRedWrapper}>
+          <img
+            src="/Logos-hexagon-left-big.png"
+            alt="Red Hex"
+            className={styles.hexRed}
+          />
+        </div>
       </div>
     );
   });
@@ -171,8 +178,8 @@ export default function Home() {
             </p>
           </div>
         </div>
-  
-        <div className={styles.container}>
+
+        <div className={styles.contentWrapper}>
           <div className={styles.toolbarRow}>
             <div className={styles.filterGroup}>
               <button
@@ -199,7 +206,7 @@ export default function Home() {
                 );
               })}
             </div>
-  
+
             <div className={styles.searchGroup}>
               <input
                 type="text"
@@ -210,16 +217,35 @@ export default function Home() {
               />
             </div>
           </div>
-  
-          {visibleItems.map((item, index) => (
-            <div
-              key={index}
-              className={`${styles.cardWrapper} ${index === 0 ? styles.featured : ""}`}
-            >
-              <FeedCard item={item} showCategory={selectedCategory === "All"} />
+
+          {/* {visibleItems.length > 1 && (
+            <div className={styles.featuredRow}>
+              <FeedCard
+                item={visibleItems[0]}
+                showCategory={selectedCategory === "All"}
+              />
+              <FeedCard
+                item={visibleItems[1]}
+                showCategory={selectedCategory === "All"}
+              />
             </div>
-          ))}
-  
+          )} */}
+
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className={styles.masonryGrid}
+            columnClassName={styles.masonryColumn}
+          >
+            {visibleItems.map((item, index) => (
+              <div key={index} className={styles.cardWrapper}>
+                <FeedCard
+                  item={item}
+                  showCategory={selectedCategory === "All"}
+                />
+              </div>
+            ))}
+          </Masonry>
+
           {isLoadingMore && (
             <div className={styles.loadingIndicator}>
               <div className={styles.spinner} role="status">

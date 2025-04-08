@@ -1,4 +1,4 @@
-.main{
+.main {
   background-color: #f9f8f6;
   overflow-x: hidden; /* only hide horizontal overflow */
   position: relative;
@@ -53,10 +53,24 @@
   z-index: 1;
 }
 
+.hexBlueWrapper {
+  position: absolute;
+  right: -100px; /* pushes off-screen */
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hexRedWrapper {
+  position: absolute;
+  left: -80px; /* pushes off-screen */
+  pointer-events: none;
+  z-index: 1;
+}
+
 .hexBlue {
   position: absolute;
-  left: 1550px;
-  top: 1000px; /* positive value moves it down */
+  right: 0;
+  top: 1000px;
   will-change: transform;
   transition: transform 0.1s linear;
   pointer-events: none;
@@ -65,11 +79,10 @@
 
 .hexRed {
   position: absolute;
-  right: 1600px;
-  top: 500px; /* tweak to match FeedCard grid */
+  left: 0;
+  top: 500px;
   will-change: transform;
   transition: transform 0.1s linear;
-  overflow-x: hidden;
   pointer-events: none;
   z-index: 1;
 }
@@ -80,11 +93,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 16px;
+  width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
-  margin-bottom: 40px;
-  /* remove to match card length */
-  /* align-items: start;  */
+  margin: 0 auto 40px auto;
+  padding: 0 12px;
 }
 
 /* wrapper for filter buttons and search */
@@ -94,9 +106,12 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  padding: 20px 00px;
-  margin-bottom: 24px;
-  grid-column: 1 / -1;
+  padding: 20px 0;
+  margin: 0 auto 24px auto;
+  max-width: 1200px;
+  padding-left: 12px;
+  padding-right: 12px;
+  box-sizing: border-box;
 }
 
 .filterGroup {
@@ -107,7 +122,7 @@
 
 .searchGroup {
   width: 100%;
-  max-width: 320px;
+  max-width: 300px;
   justify-content: flex-end;
   padding: 0;
 }
@@ -195,19 +210,19 @@ FeedCard.tsx styles
 */
 
 .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+  width: 100%;
   padding: 16px;
   border-radius: 15px;
   background: #fff;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.35);
   outline: 1px solid rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  /* remove to match card length */
-  /* height: auto; */
-   
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+  max-height: 500px; /* NEW: Limits tall cards */
+  overflow: hidden;
 }
 
 .card:hover {
@@ -217,7 +232,10 @@ FeedCard.tsx styles
 
 /* First Tile Styling */
 .featured {
-  grid-column: span 2;
+  flex-basis: calc(66.66% - 16px); /* approx 2 out of 3 columns minus gutter */
+  max-width: calc(66.66% - 16px);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .featured .title {
@@ -249,8 +267,8 @@ FeedCard.tsx styles
   text-overflow: ellipsis;
 }
 
-.date{
-  font-weight:lighter;
+.date {
+  font-weight: lighter;
   color: #540D32;
 }
 
@@ -276,12 +294,17 @@ FeedCard.tsx styles
   transform: scale(1.01);
 }
 
+@media (max-width: 1580px) {
+  .hexWrapper {
+    display: none;
+  }
+}
 
 /* 
 Adds margin for smaller screen 
 */
 @media (max-width: 1200px) {
-  .container{
+  .container {
     margin: 0 12px;
   }
 }
@@ -297,6 +320,11 @@ Mobile and Tablet
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+  }
+
+  .masonryColumn {
+    /* padding-left: 0px !important; */
+
   }
 
   .toolbarRow {
@@ -350,4 +378,63 @@ Mobile and Tablet
   .featured .content {
     font-size: 0.95rem;
   }
+
+  .hexWrapper {
+    display: none;
+  }
+}
+
+.featuredWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.featuredWrapper > * {
+  grid-column: span 2;
+}
+
+.cardWrapper {
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+/* Masonry layout */
+.masonryGrid {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto 40px auto;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.masonryColumn {
+  background-clip: padding-box;
+  padding-left: 8px;
+  padding-right: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.featuredRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.featuredRow .card {
+  font-size: 1.1rem;
+  background: #fff;
+  padding: 24px;
+  border-radius: 16px;
 }
