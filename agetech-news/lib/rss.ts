@@ -19,14 +19,21 @@ export async function fetchRSSFeed(url: string): Promise<FeedItem[]> {
 
     const feed = await parser.parseURL(url);
     console.log('✅ Successfully parsed RSS feed');
+    console.log(`🧾 Feed contains ${feed.items.length} items`);
 
-    return feed.items.map((item): FeedItem => ({
-      title: item.title ?? 'Untitled',
-      link: item.link ?? '#',
-      content: item.contentSnippet ?? '',
-      category: item.categories?.[0] ?? 'Uncategorized',
-      pubDate: item.pubDate ?? '',
-    }));
+    const mappedItems = feed.items.map((item, index): FeedItem => {
+      const mapped = {
+        title: item.title ?? 'Untitled',
+        link: item.link ?? '#',
+        content: item.contentSnippet ?? '',
+        category: item.categories?.[0] ?? 'Uncategorized',
+        pubDate: item.pubDate ?? '',
+      };
+      console.log(`🔹 Item ${index + 1}:`, mapped.title);
+      return mapped;
+    });
+
+    return mappedItems;
   } catch (err: any) {
     console.error('❌ Error in fetchRSSFeed:', err?.message || err);
     throw err;
