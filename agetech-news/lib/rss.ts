@@ -14,7 +14,7 @@ const parser = new Parser({
 });
 
 export async function fetchRSSFeed(url: string): Promise<FeedItem[]> {
-  const timeoutDuration = parseInt(process.env.RSS_TIMEOUT_MS || '10000', 10);
+  const timeoutDuration = parseInt(process.env.RSS_TIMEOUT_MS || '20000', 10);
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeoutDuration);
 
