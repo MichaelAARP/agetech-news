@@ -18,11 +18,11 @@ export default function Home() {
   const [totalSearchResults, setTotalSearchResults] = useState<number>(0);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [visibleCount, setVisibleCount] = useState<number>(96);
+  const [visibleCount, setVisibleCount] = useState<number>(66);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [hexCount, setHexCount] = useState(0);
 
-  const feedUrl = '/feed.json';
+  const feedUrl = '/api/feed';
 
   useEffect(() => {
     fetch(feedUrl)
@@ -90,7 +90,7 @@ export default function Home() {
       if (bottomReached && !isLoadingMore && !searchQuery && visibleCount < filteredItems.length) {
         setIsLoadingMore(true);
         setTimeout(() => {
-          const newVisibleCount = visibleCount + 96;
+          const newVisibleCount = visibleCount + 66;
           const newHexCount = Math.max(0, Math.ceil(newVisibleCount / 24));
           setHexCount(newHexCount);
           setVisibleCount(newVisibleCount);
