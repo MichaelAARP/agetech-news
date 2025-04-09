@@ -4,14 +4,14 @@ import { db } from '../../../../lib/firebaseAdmin';
 export async function GET(req: Request) {
   console.log('📨 update-feed route triggered');
 
-  const authHeader = req.headers.get('Authorization');
-  console.log('🔐 Received Authorization header:', authHeader);
+  // const authHeader = req.headers.get('Authorization');
+  // console.log('🔐 Received Authorization header:', authHeader);
 
-  const expected = `Bearer ${process.env.CRON_SECRET}`;
-  if (authHeader !== expected) {
-    console.log('❌ Authorization failed');
-    return new Response('Unauthorized', { status: 401 });
-  }
+  // const expected = `Bearer ${process.env.CRON_SECRET}`;
+  // if (authHeader !== expected) {
+  //   console.log('❌ Authorization failed');
+  //   return new Response('Unauthorized', { status: 401 });
+  // }
 
   const feedUrl = 'http://aarpagetechcollaborative.shiftportal.com/rss/1/-/-/5000';
 
