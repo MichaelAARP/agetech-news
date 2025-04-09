@@ -14,10 +14,21 @@ const parser = new Parser({
 });
 
 export async function fetchRSSFeed(url: string): Promise<FeedItem[]> {
-  try {
-    console.log('📡 Attempting to fetch RSS feed:', url);
+  const timeoutDuration = parseInt(process.env.RSS_TIMEOUT_MS || '10000', 10);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutDuration);
 
-    const feed = await parser.parseURL(url);
+  try {
+    console.log('📡 Attempting to fetch RSS feed:', url, `(timeout: ${timeoutDuration}ms)`);
+
+    const feed = await Promise.race([
+      parser.parseURL(url),
+      new Promise<never>((_, reject) =>
+        controller.signal.addEventListener('abort', () =>
+          reject(new Error('Request timed out'))
+        )
+      ),
+    ]) as Parser.Output<{}>;
     console.log('✅ Successfully parsed RSS feed');
     console.log(`🧾 Feed contains ${feed.items.length} items`);
 
@@ -37,5 +48,7 @@ export async function fetchRSSFeed(url: string): Promise<FeedItem[]> {
   } catch (err: any) {
     console.error('❌ Error in fetchRSSFeed:', err?.message || err);
     throw err;
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
