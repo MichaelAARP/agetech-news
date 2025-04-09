@@ -9,6 +9,5 @@ if (!admin.apps.length) {
     }),
   });
 }
-console.log('PRIVATE KEY FORMAT TEST:', process.env.FIREBASE_PRIVATE_KEY?.slice(0, 50));
 
 export const db = admin.firestore();

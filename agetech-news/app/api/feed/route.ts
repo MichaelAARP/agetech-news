@@ -1,6 +1,7 @@
 import { db } from '../../../lib/firebaseAdmin';
 
 export async function GET() {
+    console.log('🕓 CRON route invoked');
   try {
     const doc = await db.collection('rssCache').doc('latest').get();
 
