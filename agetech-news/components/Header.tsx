@@ -31,17 +31,27 @@ export default function Header() {
         <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}>
           <div
             className={styles.dropdown}
-            onMouseEnter={() => setAboutDropdownOpen(true)}
-            onMouseLeave={() => setAboutDropdownOpen(false)}
+            onClick={() => {
+              if (menuOpen) setAboutDropdownOpen(!aboutDropdownOpen);
+            }}
+            onMouseEnter={() => !menuOpen && setAboutDropdownOpen(true)}
+            onMouseLeave={() => !menuOpen && setAboutDropdownOpen(false)}
           >
-            <a
-              href="https://agetechcollaborative.org/about/"
-              className={styles.navLink}
-              rel="noopener noreferrer"
-            >
-              About AgeTech
-              <span className={styles.arrowDown}></span>
-            </a>
+            {menuOpen ? (
+              <button className={styles.navLink} type="button">
+                About AgeTech
+                <span className={styles.arrowDown}></span>
+              </button>
+            ) : (
+              <a
+                href="https://agetechcollaborative.org/about/"
+                className={styles.navLink}
+                rel="noopener noreferrer"
+              >
+                About AgeTech
+                <span className={styles.arrowDown}></span>
+              </a>
+            )}
             {aboutDropdownOpen && (
               <div className={styles.dropdownMenu}>
                 <div
@@ -109,17 +119,27 @@ export default function Header() {
           </a>
           <div
             className={styles.dropdown}
-            onMouseEnter={() => setEventsDropdownOpen(true)}
-            onMouseLeave={() => setEventsDropdownOpen(false)}
+            onClick={() => {
+              if (menuOpen) setEventsDropdownOpen(!eventsDropdownOpen);
+            }}
+            onMouseEnter={() => !menuOpen && setEventsDropdownOpen(true)}
+            onMouseLeave={() => !menuOpen && setEventsDropdownOpen(false)}
           >
-            <a
-              href="https://agetechcollaborative.org/events/"
-              className={styles.navLink}
-              rel="noopener noreferrer"
-            >
-              Events
-              <span className={styles.arrowDown}></span>
-            </a>
+            {menuOpen ? (
+              <button className={styles.navLink} type="button">
+                Events
+                <span className={styles.arrowDown}></span>
+              </button>
+            ) : (
+              <a
+                href="https://agetechcollaborative.org/events/"
+                className={styles.navLink}
+                rel="noopener noreferrer"
+              >
+                Events
+                <span className={styles.arrowDown}></span>
+              </a>
+            )}
             {eventsDropdownOpen && (
               <div className={styles.dropdownMenu}>
                 <a

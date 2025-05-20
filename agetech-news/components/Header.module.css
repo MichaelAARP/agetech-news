@@ -159,6 +159,7 @@
 }
 
 /* Mobile Styles */
+
 @media (max-width: 1345px) {
   .nav {
     display: none;
@@ -169,11 +170,49 @@
     background-color: white;
     width: 100%;
     padding: 16px 0;
+    font-size: 0.9em;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    align-items: flex-start; /* Align menu items to the left */
+    padding-left: 20px;
   }
 
   .navOpen {
     display: flex;
+  }
+
+  .navLink {
+    text-align: left; /* Ensure text is aligned to the left */
+    width: 100%; /* Make items span the full width */
+    padding: 12px 16px; /* Add padding for better spacing */
+    border-bottom: 0.1px solid lightgray; /* Add light grey line between items */
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+
+  }
+
+  .navLink:last-child {
+    border-bottom: none; /* Remove border for the last item */
+  }
+
+  .dropdown {
+    width: 100%; /* Ensure the dropdown spans the full width */
+    border-bottom: 0.1px solid lightgray; /* Add light grey line for dropdown parents */
+  }
+
+  .dropdown:last-child {
+    border-bottom: none; /* Remove border for the last dropdown parent */
+  }
+
+  .dropdownItem {
+    text-align: left; /* Ensure text is aligned to the left */
+    width: 100%; /* Make items span the full width */
+    padding: 12px 16px; /* Add padding for better spacing */
+    border-bottom: 0.1px solid lightgray; /* Add light grey line between items */
+  }
+
+  .dropdownItem:last-child {
+    border-bottom: none; /* Remove border for the last item */
   }
 
   .hamburger {
@@ -186,5 +225,13 @@
 
   .logo {
     order: 1;
+  }
+
+  .dropdownMenu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    width: 100%;
+    padding: 0;
   }
 }
