@@ -150,7 +150,7 @@ export default function Header() {
             href="https://home.agetechcollaborative.org/"
             className={styles.navLink}
           >
-            Signup
+            Sign In
           </a>
           <a
             href="https://agetechcollaborative.org/apply-to-join/"
