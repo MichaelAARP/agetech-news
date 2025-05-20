@@ -22,6 +22,21 @@ export default function Home() {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [hexCount, setHexCount] = useState(0);
 
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      setShowScrollTop(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
   const feedUrl = '/api/feed';
 
   useEffect(() => {
@@ -274,6 +289,13 @@ export default function Home() {
           )}
         </div>
       </main>
+      {showScrollTop && (
+        <button className={styles.backToTop} onClick={handleScrollToTop} aria-label="Back to Top">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 2 24 24" fill="white">
+  <path d="M12 4c-.39 0-.77.15-1.06.44L5 10.38l1.41 1.41L11 7.21V20h2V7.21l4.59 4.59L19 10.38l-5.94-5.94A1.5 1.5 0 0 0 12 4z"/>
+</svg>
+        </button>
+      )}
     </>
   );
 }
