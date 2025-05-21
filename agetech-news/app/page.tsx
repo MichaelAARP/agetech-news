@@ -208,7 +208,8 @@ export default function Home() {
           <div className={styles.heroOverlay}>
             <h1 className={styles.heroTitle}>AgeTech News</h1>
             <p className={styles.heroSubheader}>
-            Stay up to date with the latest news from companies in the AgeTech Collaborative from AARP ecosystem. From product launches to major investments and research, explore what's shaping the future of AgeTech and discover the innovations driving meaningful change.
+            Stay up to date with the latest news from companies in the AgeTech Collaborative from AARP ecosystem. 
+            From product launches to major investments and research, explore what's shaping the future of AgeTech and discover the innovations driving meaningful change.
             </p>
           </div>
         </div>
