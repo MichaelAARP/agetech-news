@@ -95,7 +95,7 @@
   padding: 12px 25px;
 }
 .dropdownItem:last-child {
-    border-bottom: none; /* Remove border for the last item */
+    border-bottom: none;
   }
 
 
@@ -181,10 +181,10 @@
   }
 
   .navLink {
-    text-align: left; /* Ensure text is aligned to the left */
-    width: 100%; /* Make items span the full width */
-    padding: 12px 16px; /* Add padding for better spacing */
-    border-bottom: 0.1px solid lightgray; /* Add light grey line between items */
+    text-align: left;
+    width: 100%;
+    padding: 12px 16px;
+    border-bottom: 0.1px solid lightgray;
     color: black;
     text-decoration: none;
     font-weight: 500;
@@ -192,27 +192,27 @@
   }
 
   .navLink:last-child {
-    border-bottom: none; /* Remove border for the last item */
+    border-bottom: none;
   }
 
   .dropdown {
-    width: 100%; /* Ensure the dropdown spans the full width */
-    border-bottom: 0.1px solid lightgray; /* Add light grey line for dropdown parents */
+    width: 100%;
+    border-bottom: 0.1px solid lightgray;
   }
 
   .dropdown:last-child {
-    border-bottom: none; /* Remove border for the last dropdown parent */
+    border-bottom: none;
   }
 
   .dropdownItem {
-    text-align: left; /* Ensure text is aligned to the left */
-    width: 100%; /* Make items span the full width */
-    padding: 12px 16px; /* Add padding for better spacing */
-    border-bottom: 0.1px solid lightgray; /* Add light grey line between items */
+    text-align: left;
+    width: 100%;
+    padding: 12px 16px;
+    border-bottom: 0.1px solid lightgray;
   }
 
   .dropdownItem:last-child {
-    border-bottom: none; /* Remove border for the last item */
+    border-bottom: none;
   }
 
   .hamburger {

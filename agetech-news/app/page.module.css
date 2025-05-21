@@ -7,16 +7,30 @@
 .hero {
   position: relative;
   height: 300px;
-  background-image: url('/hero.jpg');
-  background-size: cover;
-  background-position: center;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   padding-left: 24px;
   text-align: left;
-  margin-top: 104px; /* Needed for Header */
+  margin-top: 104px;
+  overflow: hidden; /* ensures the pseudo-element doesn't overflow */
+  z-index: 0;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/hero.jpeg');
+  background-size: cover;
+  /* background-position: center; */
+  background-position: bottom;
+  opacity: 0.95;   
+  z-index: -1; /* place the image behind the content */
 }
 
 .heroOverlay {
@@ -43,8 +57,6 @@
   font-weight: 300 !important;
   text-align: left;
 }
-
-
 
 .hexWrapper {
   position: absolute;
@@ -233,27 +245,10 @@ FeedCard.tsx styles
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.45);
 }
 
-/* First Tile Styling */
-/* .featured {
-  flex-basis: calc(66.66% - 16px);
-  max-width: calc(66.66% - 16px);
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.featured .title {
-  font-size: 1.75rem;
-}
-
-.featured .content {
-  font-size: 1.3rem;
-} */
-
 .title {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 8px;
-
 }
 
 .category {
@@ -297,6 +292,57 @@ FeedCard.tsx styles
   transform: scale(1.01);
 }
 
+.cardWrapper {
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+/* Masonry layout */
+.masonryGrid {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto 40px auto;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.masonryColumn {
+  background-clip: padding-box;
+  padding-left: 8px;
+  padding-right: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* back to top button styles */
+.backToTop {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #486784;
+  border: 2px solid #486784; /* already defined */
+  color: white;
+  border-radius: 50%;
+  padding: 10px 12px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.backToTop:hover {
+  background-color: white;
+  border-color: #486784; /* only change color, not thickness */
+  color: #486784;
+}
+
+.backToTop:hover svg path {
+  fill: #486784;
+}
+
 /* remove hex once interfer with grid */
 @media (max-width: 1580px) {
   .hexWrapper {
@@ -304,9 +350,7 @@ FeedCard.tsx styles
   }
 }
 
-/* 
-Adds margin for smaller screen 
-*/
+/* Adds margin for smaller screen */
 @media (max-width: 1200px) {
   .container {
     margin: 0 12px;
@@ -317,6 +361,7 @@ Adds margin for smaller screen
   }
 }
 
+/* reduces text size */
 @media (max-width: 550px) {
   .heroTitle {
     font-size: 2.8em;
@@ -331,9 +376,7 @@ Adds margin for smaller screen
 }
 
 
-/* 
-Mobile and Tablet 
-*/
+/* Mobile and Tablet */
 @media (max-width: 985px) {
 
   .heroOverlay {
@@ -382,87 +425,8 @@ Mobile and Tablet
     margin: 0px 3px
   }
 
-  /* First Tile Styling */
-  /* .featured {
-    grid-column: span 1 !important;
-  }
-
-  .featured .title {
-    font-size: 1.5rem;
-  }
-  
-  .featured .content {
-    font-size: 0.95rem;
-  } */
-
   .hexWrapper {
     display: none;
   }
 }
 
-.cardWrapper {
-  margin-bottom: 16px;
-  width: 100%;
-}
-
-/* Masonry layout */
-.masonryGrid {
-  display: flex;
-  justify-content: flex-start;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto 40px auto;
-  padding: 0 12px;
-  box-sizing: border-box;
-}
-
-.masonryColumn {
-  background-clip: padding-box;
-  padding-left: 8px;
-  padding-right: 8px;
-  flex: 1;
-  min-width: 0;
-}
-
-/* .featuredRow {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 16px;
-  max-width: 1200px;
-  margin: 0 auto 40px auto;
-  padding: 0 12px;
-  box-sizing: border-box;
-}
-
-.featuredRow .card {
-  font-size: 1.1rem;
-  background: #fff;
-  padding: 24px;
-  border-radius: 16px;
-} */
-
-.backToTop {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background-color: #540d32;
-  border: 2px solid #540d32; /* already defined */
-  color: white;
-  border-radius: 50%;
-  padding: 10px 12px;
-  font-size: 20px;
-  cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-}
-
-.backToTop:hover {
-  background-color: white;
-  border-color: #540d32; /* only change color, not thickness */
-  color: #540d32;
-}
-
-.backToTop:hover svg path {
-  fill: #540d32;
-}

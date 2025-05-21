@@ -43,11 +43,7 @@ export default function Header() {
                 <span className={styles.arrowDown}></span>
               </button>
             ) : (
-              <a
-                href="https://agetechcollaborative.org/about/"
-                className={styles.navLink}
-                rel="noopener noreferrer"
-              >
+              <a href="https://agetechcollaborative.org/about/" className={styles.navLink} rel="noopener noreferrer">
                 About AgeTech
                 <span className={styles.arrowDown}></span>
               </a>
@@ -59,66 +55,40 @@ export default function Header() {
                   onMouseEnter={() => setAboutSubDropdownOpen(true)}
                   onMouseLeave={() => setAboutSubDropdownOpen(false)}
                 >
-                  <a
-                    href="https://agetechcollaborative.org/about/"
-                    className={styles.dropdownItem}
-                    rel="noopener noreferrer"
-                  >
+                  <a href="https://agetechcollaborative.org/about/" className={styles.dropdownItem} rel="noopener noreferrer">
                     About
                     <span className={styles.arrowRight}></span>
                   </a>
                   {aboutSubDropdownOpen && (
                     <div className={styles.subDropdownMenu}>
-                      <a
-                        href="https://agetechcollaborative.org/agetech-by-the-numbers/"
-                        className={styles.dropdownItem}
-                      >
+                      <a href="https://agetechcollaborative.org/agetech-by-the-numbers/" className={styles.dropdownItem}>
                         AgeTech by the Numbers
                       </a>
                     </div>
                   )}
                 </div>
-                <a
-                  href="https://agetechcollaborative.org/startups/"
-                  className={styles.dropdownItem}
-                >
+                <a href="https://agetechcollaborative.org/startups/" className={styles.dropdownItem}>
                   Startups
                 </a>
-                <a
-                  href="https://agetechcollaborative.org/investors/"
-                  className={styles.dropdownItem}
-                >
+                <a href="https://agetechcollaborative.org/investors/" className={styles.dropdownItem}>
                   Investors
                 </a>
-                <a
-                  href="https://agetechcollaborative.org/enterprise/"
-                  className={styles.dropdownItem}
-                >
+                <a href="https://agetechcollaborative.org/enterprise/" className={styles.dropdownItem}>
                   Enterprises
                 </a>
-                <a
-                  href="https://agetechcollaborative.org/testbed/"
-                  className={styles.dropdownItem}
-                >
+                <a href="https://agetechcollaborative.org/testbed/" className={styles.dropdownItem}>
                   Testbeds
                 </a>
-                <a
-                  href="https://agetechcollaborative.org/business-service/"
-                  className={styles.dropdownItem}
-                >
+                <a href="https://agetechcollaborative.org/business-service/" className={styles.dropdownItem}>
                   Business Services
                 </a>
               </div>
             )}
           </div>
-          <a
-            href="https://home.agetechcollaborative.org/startup/directory"
-            className={styles.navLink}
-          >
+          <a href="https://home.agetechcollaborative.org/startup/directory" className={styles.navLink}>
             Startup Directory
           </a>
-          <div
-            className={styles.dropdown}
+          <div className={styles.dropdown}
             onClick={() => {
               if (menuOpen) setEventsDropdownOpen(!eventsDropdownOpen);
             }}
@@ -131,51 +101,32 @@ export default function Header() {
                 <span className={styles.arrowDown}></span>
               </button>
             ) : (
-              <a
-                href="https://agetechcollaborative.org/events/"
-                className={styles.navLink}
-                rel="noopener noreferrer"
-              >
+              <a href="https://agetechcollaborative.org/events/" className={styles.navLink} rel="noopener noreferrer">
                 Events
                 <span className={styles.arrowDown}></span>
               </a>
             )}
             {eventsDropdownOpen && (
               <div className={styles.dropdownMenu}>
-                <a
-                  href="https://agetechcollaborative.org/events/"
-                  className={styles.dropdownItem}
-                >
+                <a href="https://agetechcollaborative.org/events/" className={styles.dropdownItem}>
                   Pitch Events
                 </a>
-                <a
-                  href="https://agetechcollaborative.org/ces/"
-                  className={styles.dropdownItem}
-                >
+                <a href="https://agetechcollaborative.org/ces/" className={styles.dropdownItem}>
                   CES
                 </a>
               </div>
             )}
           </div>
-          <a
-            href="https://agetechcollaborative.org/insights/"
-            className={styles.navLink}
-          >
+          <a href="https://agetechcollaborative.org/insights/" className={styles.navLink}>
             Insights
           </a>
           <a href="/" className={styles.navLink}>
             News
           </a>
-          <a
-            href="https://home.agetechcollaborative.org/"
-            className={styles.navLink}
-          >
+          <a href="https://home.agetechcollaborative.org/" className={styles.navLink}>
             Sign In
           </a>
-          <a
-            href="https://agetechcollaborative.org/apply-to-join/"
-            className={styles.applyToday}
-          >
+          <a href="https://agetechcollaborative.org/apply-to-join/" className={styles.applyToday}>
             Apply Today
           </a>
         </nav>
