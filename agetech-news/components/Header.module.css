@@ -121,21 +121,21 @@
 /* Arrow Icons */
 .arrowDown {
   display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-left: 2px solid black;
-  border-bottom: 2px solid black;
-  transform: rotate(-45deg);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid black;
   margin-left: 4px;
 }
 
 .arrowRight {
   display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-top: 2px solid black;
-  border-right: 2px solid black;
-  transform: rotate(45deg);
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid black;
   margin-left: 4px;
 }
 

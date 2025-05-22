@@ -56,7 +56,7 @@ export default function Header() {
                   onMouseLeave={() => setAboutSubDropdownOpen(false)}
                 >
                   <a href="https://agetechcollaborative.org/about/" className={styles.dropdownItem} rel="noopener noreferrer">
-                    About
+                    About &nbsp;
                     <span className={styles.arrowRight}></span>
                   </a>
                   {aboutSubDropdownOpen && (

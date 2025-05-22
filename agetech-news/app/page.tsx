@@ -217,8 +217,7 @@ export default function Home() {
         <div className={styles.contentWrapper}>
           <div className={styles.toolbarRow}>
             <div className={styles.filterGroup}>
-              <button
-                className={`${styles.filterBtn} ${
+              <button className={`${styles.filterBtn} ${
                   selectedCategory === "All" ? styles.primary : styles.outline
                 }`}
                 onClick={() => setSelectedCategory("All")}
@@ -252,20 +251,6 @@ export default function Home() {
               />
             </div>
           </div>
-
-          {/* {visibleItems.length > 1 && (
-            <div className={styles.featuredRow}>
-              <FeedCard
-                item={visibleItems[0]}
-                showCategory={selectedCategory === "All"}
-              />
-              <FeedCard
-                item={visibleItems[1]}
-                showCategory={selectedCategory === "All"}
-              />
-            </div>
-          )} */}
-
           <Masonry
             breakpointCols={breakpointColumnsObj}
             className={styles.masonryGrid}
@@ -293,8 +278,8 @@ export default function Home() {
       {showScrollTop && (
         <button className={styles.backToTop} onClick={handleScrollToTop} aria-label="Back to Top">
           <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 2 24 24" fill="white">
-  <path d="M12 4c-.39 0-.77.15-1.06.44L5 10.38l1.41 1.41L11 7.21V20h2V7.21l4.59 4.59L19 10.38l-5.94-5.94A1.5 1.5 0 0 0 12 4z"/>
-</svg>
+            <path d="M12 4c-.39 0-.77.15-1.06.44L5 10.38l1.41 1.41L11 7.21V20h2V7.21l4.59 4.59L19 10.38l-5.94-5.94A1.5 1.5 0 0 0 12 4z"/>
+          </svg>
         </button>
       )}
     </>
