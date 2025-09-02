@@ -208,8 +208,10 @@ export default function Home() {
           <div className={styles.heroOverlay}>
             <h1 className={styles.heroTitle}>AgeTech News</h1>
             <p className={styles.heroSubheader}>
-            Stay up to date with the latest news from companies in the AgeTech Collaborative from AARP ecosystem. 
-            From product launches to major investments and research, explore what's shaping the future of AgeTech and discover the innovations driving meaningful change.
+              Stay up to date with the latest news from companies in the AgeTech
+              Collaborative from AARP ecosystem. From product launches to major
+              investments and research, explore what's shaping the future of
+              AgeTech and discover the innovations driving meaningful change.
             </p>
           </div>
         </div>
@@ -217,7 +219,8 @@ export default function Home() {
         <div className={styles.contentWrapper}>
           <div className={styles.toolbarRow}>
             <div className={styles.filterGroup}>
-              <button className={`${styles.filterBtn} ${
+              <button
+                className={`${styles.filterBtn} ${
                   selectedCategory === "All" ? styles.primary : styles.outline
                 }`}
                 onClick={() => setSelectedCategory("All")}
@@ -242,7 +245,11 @@ export default function Home() {
             </div>
 
             <div className={styles.searchGroup}>
+              <label htmlFor="searchInput" className="sr-only">
+                Search Stories
+              </label>
               <input
+                id="searchInput"
                 type="text"
                 className={styles.searchInput}
                 placeholder="Search Stories..."
@@ -276,9 +283,19 @@ export default function Home() {
         </div>
       </main>
       {showScrollTop && (
-        <button className={styles.backToTop} onClick={handleScrollToTop} aria-label="Back to Top">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 2 24 24" fill="white">
-            <path d="M12 4c-.39 0-.77.15-1.06.44L5 10.38l1.41 1.41L11 7.21V20h2V7.21l4.59 4.59L19 10.38l-5.94-5.94A1.5 1.5 0 0 0 12 4z"/>
+        <button
+          className={styles.backToTop}
+          onClick={handleScrollToTop}
+          aria-label="Back to Top"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            width="24"
+            viewBox="0 2 24 24"
+            fill="white"
+          >
+            <path d="M12 4c-.39 0-.77.15-1.06.44L5 10.38l1.41 1.41L11 7.21V20h2V7.21l4.59 4.59L19 10.38l-5.94-5.94A1.5 1.5 0 0 0 12 4z" />
           </svg>
         </button>
       )}

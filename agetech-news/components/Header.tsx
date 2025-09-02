@@ -8,6 +8,7 @@ export default function Header() {
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
   const [aboutSubDropdownOpen, setAboutSubDropdownOpen] = useState(false);
   const [eventsDropdownOpen, setEventsDropdownOpen] = useState(false);
+  const [resourcesDropdownOpen, setResourcesDropdownOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -23,7 +24,7 @@ export default function Header() {
             className={styles.logoImage}
           />
         </a>
-        <button className={styles.hamburger} onClick={toggleMenu}>
+        <button className={styles.hamburger} onClick={toggleMenu} aria-label="Toggle menu">
           <span className={styles.hamburgerLine}></span>
           <span className={styles.hamburgerLine}></span>
           <span className={styles.hamburgerLine}></span>
@@ -117,12 +118,39 @@ export default function Header() {
               </div>
             )}
           </div>
-          <a href="https://agetechcollaborative.org/insights/" className={styles.navLink}>
-            Insights
-          </a>
-          <a href="/" className={styles.navLink}>
-            News
-          </a>
+          <div
+            className={styles.dropdown}
+            onClick={() => {
+              if (menuOpen) setResourcesDropdownOpen(!resourcesDropdownOpen);
+            }}
+            onMouseEnter={() => !menuOpen && setResourcesDropdownOpen(true)}
+            onMouseLeave={() => !menuOpen && setResourcesDropdownOpen(false)}
+          >
+            {menuOpen ? (
+              <button className={styles.navLink} type="button">
+                Resources
+                <span className={styles.arrowDown}></span>
+              </button>
+            ) : (
+              <a href="#" className={styles.navLink} onClick={(e) => e.preventDefault()}>
+                Resources
+                <span className={styles.arrowDown}></span>
+              </a>
+            )}
+            {resourcesDropdownOpen && (
+              <div className={styles.dropdownMenu}>
+                <a href="https://agetechcollaborative.org/insights/" className={styles.dropdownItem}>
+                  Insights
+                </a>
+                <a href="https://home.agetechcollaborative.org/startup/blog" className={styles.dropdownItem}>
+                  Blog
+                </a>
+                <a href="https://agetechcollaborative.org/news/" className={styles.dropdownItem}>
+                  News
+                </a>
+              </div>
+            )}
+          </div>
           <a href="https://home.agetechcollaborative.org/" className={styles.navLink}>
             Sign In
           </a>
